@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm
 
+
 class UserRegisterView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
     model = User
     form_class = CustomUserCreationForm
@@ -12,7 +13,8 @@ class UserRegisterView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateVi
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
+
 class UserListView(LoginRequiredMixin, generic.ListView):
     model = User
     template_name = 'users.html'

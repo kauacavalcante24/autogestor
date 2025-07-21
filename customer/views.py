@@ -12,6 +12,7 @@ class CustomerCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = CustomerModelForm
     success_url = reverse_lazy('inicial')
 
+
 class CustomerListView(LoginRequiredMixin, generic.ListView):
     model = Customer
     template_name = 'customers.html'
@@ -25,7 +26,7 @@ class CustomerListView(LoginRequiredMixin, generic.ListView):
             customers_query = Customer.objects.filter(name__icontains=search).order_by('name')
         else:
             customers_query = Customer.objects.none()
-        
+
         context['customers_query'] = customers_query
         context['search_query'] = search
 

@@ -7,6 +7,7 @@ def date_format():
     date = datetime.now().strftime('%d/%m/%Y')
     return date
 
+
 def send_email_worker(user):
     date = date_format()
     email = os.getenv('EMAIL_HOST_USER')
@@ -46,6 +47,7 @@ def send_email_worker(user):
         print(f'==> Falha ao enviar email para {user.first_name}')
         print(f'Endereço: {user.email}')
         print('-' * 50)
+
 
 def send_email_customer(customer):
     date = date_format()

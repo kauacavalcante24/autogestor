@@ -9,6 +9,7 @@ STATUS_MAINTENANCES = (
     ('completed', 'Concluído'),
 )
 
+
 class ServiceType(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name='Nome do Serviço')
 
@@ -53,7 +54,7 @@ class Maintenances(models.Model):
     class Meta:
         verbose_name = 'Manutenção'
         verbose_name_plural = 'Manutenções'
-    
+
     def __str__(self):
         return f'{self.vehicle.brand} {self.vehicle.model} | {self.vehicle.plate}'
 

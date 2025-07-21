@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(
         label='Nome',
@@ -25,8 +26,9 @@ class CustomUserCreationForm(UserCreationForm):
     )
 
     class Meta:
+
         model = User
-        fields = ['username', 'first_name', 'last_name' ,'email', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
         widgets = {
             'username': forms.TextInput(attrs={
                 'placeholder': 'Letras, números e @/./+/-/_ apenas.',
@@ -36,7 +38,7 @@ class CustomUserCreationForm(UserCreationForm):
                 'class': 'form-control'
             }),
             'email': forms.EmailInput(attrs={
-                'placeholder' : 'Usuario@email.com',
+                'placeholder': 'Usuario@email.com',
                 'class': 'form-control'
             }),
         }
@@ -48,7 +50,7 @@ class CustomUserCreationForm(UserCreationForm):
     def clean_first_name(self):
         first_name = self.cleaned_data.get('first_name')
         return first_name.title()
-    
+
     def clean_last_name(self):
         last_name = self.cleaned_data.get('last_name')
         return last_name.title()

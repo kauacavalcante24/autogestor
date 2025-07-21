@@ -22,7 +22,7 @@ class MaintenancesModelForm(forms.ModelForm):
                 raise forms.ValidationError(
                     f'{vehicle.brand} {vehicle.model} de placa {vehicle.plate} já está em manutenção (status: Em andamento).'
                 )
-            
+
             is_waiting = Maintenances.objects.filter(
                 vehicle=vehicle,
                 status='waiting'

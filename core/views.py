@@ -10,7 +10,7 @@ class InicialView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         search = self.request.GET.get('search')
         if search:
             customers = Customer.objects.filter(name__icontains=search).order_by('name')

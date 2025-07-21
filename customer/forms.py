@@ -3,7 +3,7 @@ from .models import Customer
 
 
 class CustomerModelForm(forms.ModelForm):
-    
+
     class Meta:
         model = Customer
         fields = ['name', 'phone_number', 'email', 'cpf']
@@ -30,3 +30,7 @@ class CustomerModelForm(forms.ModelForm):
         if any(num.isalpha() for num in phone_number):
             raise forms.ValidationError("O telefone não pode conter letras.")
         return phone_number
+
+    def clean_name(self):
+        name = self.cleaned_data.get('name')
+        return name.title()

@@ -6,5 +6,7 @@ class UserConfig(AppConfig):
     name = 'user'
     verbose_name = 'Funcionários'
 
-    def ready(self):
-        import user.signals
+    # Para ativar o envio de email automático
+
+    # def ready(self):
+    #     import user.signals

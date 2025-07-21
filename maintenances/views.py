@@ -26,7 +26,7 @@ class MaintenanceDetailView(generic.DetailView):
         services = Service.objects.filter(maintenances=self.object.pk)
         context['services'] = services
         return context
-    
+
 
 class MaintenanceCreateView(generic.CreateView):
     model = Maintenances

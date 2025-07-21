@@ -3,6 +3,7 @@ from django import template
 
 register = template.Library()
 
+
 @register.filter
 def phone_number_format(value):
     try:

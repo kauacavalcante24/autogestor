@@ -6,5 +6,7 @@ class CustomerConfig(AppConfig):
     name = 'customer'
     verbose_name = 'Cliente'
 
-    def ready(self):
-        import customer.signals
+    # Para ativar o envio de email automático
+
+    # def ready(self):
+    #     import customer.signals

@@ -8,7 +8,7 @@ class Brand(models.Model):
     class Meta:
         verbose_name = 'Marca'
         verbose_name_plural = 'Marcas'
-    
+
     def __str__(self):
         return self.name
 
