@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block styles %}
+<style>
+    #container {
+        width: 40vw;
+        margin: auto;
+    }
+    
+    @media(max-width:768px) {
+        #container {
+            width: 90vw;
+            margin: auto;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div id="container">
+        <div class="text-center">
+            <h1>Registro de Colaborador</h1>
+        </div>
+        <hr>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.username.label }}
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                    
+                </div>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    {{ form.first_name.label }}
+                    {{ form.first_name }}
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    {{ form.last_name.label }}
+                    {{ form.last_name }}
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form.email.label }}
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+            <div class="mb-3">
+                {{ form.password1.label }}
+                {{ form.password1 }}
+                {{ form.password1.errors }}
+            </div>
+            <div class="mb-3">
+                {{ form.password2.label }}
+                {{ form.password2 }}
+                {{ form.password2.errors }}
+            </div>
+            <div class="d-row text-center">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <a href="{% url 'inicial' %}" class="btn btn-dark">Voltar</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

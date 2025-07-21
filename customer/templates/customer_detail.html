@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load num_phone_format %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+<style>
+    #container {
+        width: 50vw;
+    }
+
+    #container-infos {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    @media(max-width: 750px) {
+        #container {
+            width: 95vw;
+        }
+
+        #container-infos {
+            display: grid;
+            justify-content: space-between;
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container mt-5" id="container">
+    <div class="card shadow-sm p-4" style="border-radius: 12px;">
+        <h2 class="mb-3">{{ object.name }}</h2>
+        <hr>
+        <div class="mb-3">
+            <div id="container-infos">
+                <ul class="list-unstyled">
+                    <li><strong>Número de Telefone:</strong> {{ object.phone_number|phone_number_format }}</li>
+                    <li><strong>Email:</strong> {{ object.email|default:"Não informado" }}</li>
+                </ul>
+                <ul class="list-unstyled">
+                    <li><strong>CPF:</strong> {{ object.cpf|default:"Não informado" }}</li>
+                    <li><strong>Cadastrado(a) em:</strong> {{ object.created_at|date:"d/m/y \à\s\ H:i" }}</li>
+                </ul>
+            </div>
+            <hr>
+            <h4>Veículo(s) cadastrados</h4>
+            {% for obj in vehicle %}
+                <ul class="list-unstyled mb-0">
+                    <li>{{ obj.brand }} {{ obj.model }} - {{ obj.plate }}</li>
+                </ul>
+            {% empty %}
+                <p>Não há veículo vinculado à esse cliente.</p>
+            {% endfor %}
+        </div>
+        <div class="d-flex gap-2 justify-content-center">
+            <a href="" class="btn-warning-custom">Editar</a>
+            <a href="" class="btn-danger-custom">Deletar</a>
+            <a href="{% url 'customers_list' %}" class="btn-dark-custom">Voltar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

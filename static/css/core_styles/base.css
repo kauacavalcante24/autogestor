@@ -1,0 +1,22 @@
+body {
+    padding-top: 70px;
+    padding-bottom: 60px;
+    background-color: #C4C4C4;
+}
+.header {
+    background-color: #920604;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+.header-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+}
+footer {
+    background-color: #920604;
+    height: 60px;
+}

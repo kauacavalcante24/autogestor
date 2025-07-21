@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load num_phone_format %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="container text-center">
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-8">
+                    <form method="GET" class="input-group" action="">
+                        <input type="text" name="search" class="form-control" placeholder="Buscar cliente por nome..." value="{{ search_query|default:'' }}">
+                        <button class="btn" style="background-color: #920604; color: white;" type="submit">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% if search_query %}
+            {% if customers_query %}
+                <div class="mt-4 text-start">
+                    <h5>Resultados da Busca</h5>
+                    <ul class="list-group">
+                        {% for obj in customers_query %}
+                            <li class="list-group-item">
+                                <a href="{% url 'customer_detail' obj.id %}" class="btn">{{ obj.name }} - {{ obj.phone_number }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <div class="mt-4 text-start">
+                    Nenhum cliente encontrado para "{{ search_query }}"
+                </div>
+            {% endif %}
+        {% endif %}
+        {% if not search_query %}
+            <div class="container">
+                <div class="text-center">
+                    <h1>Clientes</h1>
+                </div>
+                <div class="row justify-content-center">
+                    {% if customers %}
+                        {% for obj in customers %}
+                            <div class="card m-2 row" style="width: 23rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ obj.name }}</h5>
+                                    <ul class="list-unstyled">
+                                        <li><strong>Número de Telefone: </strong>{{ obj.phone_number|phone_number_format }}</li>
+                                        <li><strong>Email: </strong>{{ obj.email|default:"Não informado" }}</li>
+                                        <li><strong>CPF: </strong>{{ obj.cpf|default:"Não informado" }}</li>
+                                    </ul>
+                                    <a href="{% url 'customer_detail' obj.id %}" class="btn-dark-custom mt-1">Visualizar</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>Nenhum cliente cadastrado.</p>
+                    {% endif %}
+                </div>
+                <div class="d-flex justify-content-center py-3">
+                    <div class="px-2">
+                        <a href="{% url 'customer_create' %}" class="btn-success-custom">Adicionar Cliente</a>
+                    </div>
+                    <div class="px-2">
+                        <a href="{% url 'inicial' %}" class="btn-dark-custom">Voltar</a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

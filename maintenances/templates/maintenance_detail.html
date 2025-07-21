@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="width: 50vw;">
+    <div class="card shadow-sm p-4" style="border-radius: 12px;">
+        <h2 class="mb-3">{{ object.vehicle }}</h2>
+        <hr>
+
+        <div class="mb-3">
+            <div class="d-flex" style="justify-content: space-between;" >
+                <p><strong>Data de Entrada:</strong> {{ object.entry_date|date:"d/m/y \à\s\ H:i" }}</p>
+                <p><strong>Proprietário:</strong> <a href="{% url 'customer_detail' object.vehicle.owner.id %}" style="text-decoration: none;">{{ object.vehicle.owner }}</a></p>
+            </div>
+            <div class="d-flex" style="justify-content: space-between;" >
+                {% if object.status == 'in_progress' %}
+                    <p><strong>Status:</strong><strong class="text-warning"> PENDENTE</strong></p>
+                {% elif object.status == 'completed' %}
+                    <p><strong>Status:</strong><strong class="text-success"> CONCLUÍDO</strong></p>
+                {% elif object.status == 'waiting' %}
+                    <p><strong>Status:</strong><strong class="text-primary"> AGUARDANDO APROVAÇÂO</strong></p>
+                {% endif %}
+                <p><strong>Cor: </strong>{{ object.vehicle.color }}</p>
+            </div>
+            <p><strong>Descrição:</strong> {{ object.description|default:"Não informado" }}</p>
+            <p><strong>Valor Total:</strong> {{ object.total_value }}</p>
+            <hr>
+            <h4>Serviços</h4>
+            {% if services %}
+                <table class="w-100">
+                    <thead>
+                        <tr>
+                            <th>Serviços Prestados</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for obj in services %}
+                        <tr>
+                            <td>{{ obj.service_type }}</td>
+                            <td>{{ obj.value }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Nenhum serviço prestado.</p>
+            {% endif %}
+        </div>
+
+        <div class="d-flex gap-2">
+            <a href="" class="btn-warning-custom">Editar</a>
+            <a href="" class="btn-danger-custom">Deletar</a>
+            <a href="{% url 'maintenances_list' %}" class="btn-dark-custom">Voltar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+<style>
+    #container {
+        width: 40vw;
+        margin: auto;
+    }
+    
+    @media(max-width:768px) {
+        #container {
+            width: 90vw;
+            margin: auto;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block title %}Faça o Login{% endblock %}
+
+{% block content %}
+    <div id="container">
+        <div style="text-align: center;">
+            <h1>Olá, Colaborador!</h1>
+        </div>
+        <hr>
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+            <div class="mb-3">
+                {{ form.username.label }}
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    <input type="text" class="form-control" placeholder="Username" id="username" name="username" aria-label="Username" aria-describedby="basic-addon1" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-danger">Entrar</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

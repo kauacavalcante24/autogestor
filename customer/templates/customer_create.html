@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="w-50 mx-auto">
+    <div style="text-align: center;">
+        <h1>Cadastrar Cliente</h1>
+    </div>
+    <hr>
+    <form method="post" action="{% url 'customer_create' %}">
+        {% csrf_token %}
+
+        <div class="mb-3"> 
+            <label>Nome do Cliente</label>
+            {{ form.name }}
+            {{ form.name.errors }}
+        </div>
+
+        <div class="mb-3">
+            <label>Número de Telefone</label>
+            {{ form.phone_number }}
+            {{ form.phone_number.errors }}
+        </div>
+
+        <div class="mb-3">
+            <label>Email (opcional)</label>
+            {{ form.email }}
+            {{ form.phone_number.errors }}
+        </div>
+
+        <div class="mb-3">
+            <label>CPF (opcional)</label>
+            {{ form.cpf }}
+            {{ form.cpf.errors }}
+        </div>
+
+        <div class="mb-3">
+            <a href="{% url 'vehicle_create' %}" class="btn-success-custom">Cadastrar Veículo</a>
+        </div>
+
+        <div class="d-row text-center gap-2">
+            <input type="submit" value="Cadastrar" class="btn btn-primary" id="btn-primary">
+            <a href="{% url 'inicial' %}" class="btn btn-danger">Voltar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

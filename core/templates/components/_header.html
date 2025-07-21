@@ -1,0 +1,29 @@
+{% block styles %}
+<style>
+@media (max-width: 700px) {
+    .logo {
+        display: none;
+    }
+}
+</style>
+{% endblock %}
+
+<div class="header fixed-top d-flex align-items-center px-3" style="height: 60px; justify-content: space-between;">
+    <div class="header-title">
+        Bem vindo de volta, {{ user.first_name|default:user.username }}! <i class="bi bi-gear"></i>
+    </div>
+    <div class="logo" style="position: absolute; left: 50%; transform: translateX(-50%);">
+        <h4><strong>AutoGestor </strong><i class="bi bi-car-front"></i></h4>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="d-flex">
+        {% if user.is_staff %}
+            <a href="{% url 'admin:index' %}" class="btn btn-primary btn-sm" style="margin-right: 5px;">Admin</a>
+        {% endif %}
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Sair</button>
+        </form>
+    </div>
+    {% endif %}
+</div>

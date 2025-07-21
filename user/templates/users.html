@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <h4>Colaboradores</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                <th>ID</th>
+                <th>Colaborador</th>
+                <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in workers %}
+                <tr>
+                    <td>#{{ obj.id }}</td>
+                    <td>
+                        <a href="#" style="text-decoration: none;">
+                            {% if obj.first_name %}
+                                {{ obj.first_name }}
+                            {% else %}
+                                {{ obj.username }} (Nome de Usuário)
+                            {% endif %}
+                        </a>
+                    </td>
+                    <td>{{ obj.email }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">Nenhum colaborador cadastrado</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        <a href="#" class="btn-success-custom">Adicionar Colaborador</a>
+        <a href="{% url 'inicial' %}" class="btn-dark-custom">Voltar</a>
+    </div>
+{% endblock %}

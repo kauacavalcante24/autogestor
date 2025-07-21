@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+<style>
+    #container-main {
+        width: 50vw;
+    }
+
+    #container-form {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #container-form-son {
+        width: 45%;
+    }
+
+    @media(max-width: 750px) {
+        #container-main {
+            width: 95%;
+        }
+
+        #container-form {
+            display: grid;
+            justify-content: center;
+        }
+
+        #container-form-son {
+            width: 100%;
+        }
+
+        #container-form-son input{
+            width: 90vw;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="mx-auto" id="container-main">
+    <div style="text-align: center;">
+        <h1>Cadastrar Veículo</h1>
+    </div>
+    <hr>
+    <form method="post" action="{% url 'vehicle_create' %}">
+        {% csrf_token  %}
+
+        <div id="container-form">
+            <div id="container-form-son">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Fabricante do Veículo</label>
+                    <select name="brand" id="id_brand" class="form-select">
+                        <option selected>Selecione a fabricante</option>
+                    {% for obj in brands %}
+                        <option value="{{ obj.id }}">{{ obj.name }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Modelo do Veículo</label>
+                    {{ form.model }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Placa</label>
+                    {{ form.plate }}
+                </div>
+            </div>
+            <div id="container-form-son">
+                <div class="mb-3">
+                    <label class="form-label">Ano</label>
+                    {{ form.year }}
+                    {{ form.year.errors }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Cor</label>
+                    {{ form.color }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Proprietário</label>
+                    <select name="owner" id="id_owner" class="form-select">
+                        <option selected>Selecione o proprietário</option>
+                    {% for obj in customers %}
+                        <option value="{{ obj.id }}">{{ obj.name }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="d-row text-center gap-2 mt-3">
+            <input type="submit" class="btn btn-primary" value="Cadastrar" id="btn-primary">
+            <a href="{% url 'customer_create' %}" class="btn btn-danger">Voltar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

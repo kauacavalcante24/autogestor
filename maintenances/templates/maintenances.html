@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+<div class="container">
+    <div class="text-center mb-4">
+        <h1>Manutenções</h1>
+    </div>
+    {% if maintenances %}
+        <div class="row" style="justify-content: space-between">
+            {% for obj in maintenances %}
+                <div class="card" style="width: 25rem; margin-bottom: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ obj.vehicle }}</h5>
+                        {% if obj.status == 'in_progress' %}
+                            <h6 class="card-subtitle mb-2 text-body-secondary"><strong>Status:</strong><strong class="text-warning"> PENDENTE <i class="bi bi-exclamation-circle"></i></strong></h6>
+                        {% elif obj.status == 'completed' %}
+                            <h6 class="card-subtitle mb-2 text-body-secondary"><strong>Status:</strong><strong class="text-success"> CONCLUÍDO <i class="bi bi-check-circle"></i></strong></h6>
+                        {% elif obj.status == 'waiting' %}
+                            <h6 class="card-subtitle mb-2 text-body-secondary"><strong>Status:</strong><strong class="text-primary"> AGUARDANDO APROVAÇÃO <i class="bi bi-dash-circle"></i></strong></h6>
+                        {% endif %}
+                        <p class="mb-1"><strong>Data de Entrada:</strong> {{ obj.entry_date|date:"d/m/y \à\s\ H:i" }}</p>
+                        <p class="mb-1"><strong>Proprietário:</strong> {{ obj.vehicle.owner }}</p>
+                        <p class="mb-0"><strong>Valor Total:</strong> {{ obj.total_value }}</p>
+                        <a href="{% url 'maintenance_detail' obj.id %}" class="btn-dark-custom mt-2">Visualizar</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="mt-4 text-start">Não há manutenções cadastradas</p>
+    {% endif %}
+    <div class="d-grid gap-2 col-6 mx-auto mt-4" style="width: 20rem;">
+        <a href="{% url 'inicial' %}" class="btn-dark-custom">Voltar</a>
+    </div>
+</div>
+{% endblock %}

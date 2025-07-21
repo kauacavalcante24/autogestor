@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+{% endblock %}
+
+{% block content %}
+<div class="w-50 mx-auto">
+    <div style="text-align: center;">
+        <h1>Cadastrar Manutenção</h1>
+    </div>
+    <hr>
+    <form method="post" action="{% url 'maintenance_create' %}">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        <div class="mb-3">
+            <label for="vehicle" class="form-label">Veículo</label>
+            <select name="vehicle" class="form-select" id="vehicle">
+                <option selected>Selecione o veículo</option>
+                {% for obj in vehicles %}
+                    <option value="{{ obj.id }}">{{ obj }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="responsible" class="form-label">Responsável</label>
+            <select name="responsible" class="form-select" id="responsible">
+                <option selected>Selecione o responsável</option>
+                {% for obj in workers %}
+                    <option value="{{ obj.id }}">{{ obj.first_name|default:obj.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Descrição (opcional)</label>
+            <textarea type="text" class="form-control" id="description" name="description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Status</label>
+            {{ form.status }}
+        </div>
+        <div class="d-row text-center gap-2">
+            <input type="submit" class="btn btn-primary" value="Cadastrar" id="btn-primary">
+            <a href="{% url 'inicial' %}" class="btn btn-dark">Voltar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
