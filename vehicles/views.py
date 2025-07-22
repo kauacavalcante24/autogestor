@@ -18,3 +18,9 @@ class VehicleCreateView(generic.CreateView):
         context['brands'] = brands
         context['customers'] = customers
         return context
+
+
+class VehicleListView(generic.ListView):
+    model = Vehicle
+    template_name = 'vehicles.html'
+    context_object_name = 'vehicles'

@@ -10,7 +10,11 @@
 
 <div class="header fixed-top d-flex align-items-center px-3" style="height: 60px; justify-content: space-between;">
     <div class="header-title">
-        <p id="welcome-message">Bem vindo de volta, {{ user.first_name|default:user.username }}! <i class="bi bi-gear"></i></p>
+        {% if user.is_authenticated %}
+            <p id="welcome-message">Bem vindo de volta, {{ user.first_name|default:user.username }}! <i class="bi bi-gear"></i></p>
+        {% else %}
+            <p id="welcome-message">Sistema de Gerenciamento <i class="bi bi-gear"></i></p>
+        {% endif %}
     </div>
     <div class="logo" style="position: absolute; left: 50%; transform: translateX(-50%);">
         <h4><strong>AutoGestor </strong><i class="bi bi-car-front"></i></h4>

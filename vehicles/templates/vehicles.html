@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+{% endblock %}
+
+{% block content %}
+    {% for obj in vehicles %}
+        <p>{{ obj.brand }} {{ obj.model }}</p>
+        <p>{{ obj.plate }}</p>
+        <p>{{ obj.year }}</p>
+        <p>{{ obj.color }}</p>
+    {% empty %}
+        <p>Não há veículos cadastrados</p>
+    {% endfor %}
+{% endblock %}
