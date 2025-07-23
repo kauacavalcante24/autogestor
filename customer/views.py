@@ -1,9 +1,11 @@
-from .models import Customer
-from django.views import generic
-from django.urls import reverse_lazy
-from .forms import CustomerModelForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views import generic
+
 from vehicles.models import Vehicle
+
+from .forms import CustomerModelForm
+from .models import Customer
 
 
 class CustomerCreateView(LoginRequiredMixin, generic.CreateView):

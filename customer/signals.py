@@ -1,7 +1,9 @@
 from django.db.models.signals import post_save
-from .models import Customer
 from django.dispatch import receiver
+
 from notifications.utils import send_email_customer
+
+from .models import Customer
 
 
 @receiver(post_save, sender=Customer)

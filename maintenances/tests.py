@@ -1,9 +1,11 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
-from .models import Maintenances
-from vehicles.models import Vehicle, Brand
+
 from customer.models import Customer
-from django.contrib.auth.models import User
+from vehicles.models import Brand, Vehicle
+
+from .models import Maintenances
 
 
 class MaintenancesTestView(TestCase):

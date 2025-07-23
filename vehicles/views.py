@@ -1,8 +1,10 @@
-from django.views import generic
 from django.urls import reverse_lazy
-from .models import Vehicle, Brand
+from django.views import generic
+
 from customer.models import Customer
+
 from .forms import VehicleModelForm
+from .models import Brand, Vehicle
 
 
 class VehicleCreateView(generic.CreateView):

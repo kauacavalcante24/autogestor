@@ -1,7 +1,7 @@
-from django.db import models
-from vehicles.models import Vehicle
 from django.contrib.auth.models import User
+from django.db import models
 
+from vehicles.models import Vehicle
 
 STATUS_MAINTENANCES = (
     ('waiting', 'Aguardando aprovação'),

@@ -1,8 +1,9 @@
-from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from maintenances.models import Maintenances
-from customer.models import Customer
 from django.utils.timezone import now
+from django.views.generic import TemplateView
+
+from customer.models import Customer
+from maintenances.models import Maintenances
 
 
 class InicialView(LoginRequiredMixin, TemplateView):

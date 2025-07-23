@@ -1,7 +1,9 @@
 from django.test import TestCase
 from django.urls import reverse
-from .models import Vehicle, Brand
+
 from customer.models import Customer
+
+from .models import Brand, Vehicle
 
 
 class VehicleTestView(TestCase):

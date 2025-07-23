@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import MaintenanceListView, MaintenanceDetailView, MaintenanceCreateView
 
+from .views import (MaintenanceCreateView, MaintenanceDetailView,
+                    MaintenanceListView)
 
 urlpatterns = [
     path('', MaintenanceListView.as_view(), name='maintenances_list'),

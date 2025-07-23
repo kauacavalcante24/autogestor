@@ -1,6 +1,7 @@
 from django import forms
-from .models import Vehicle
 from django.utils.timezone import now
+
+from .models import Vehicle
 
 
 class VehicleModelForm(forms.ModelForm):

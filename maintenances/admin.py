@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import ServiceType, Maintenances, Service
+
 from vehicles.models import Vehicle
+
+from .models import Maintenances, Service, ServiceType
 
 
 @admin.register(ServiceType)

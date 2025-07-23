@@ -1,9 +1,11 @@
-from django.views import generic
-from django.urls import reverse_lazy
-from .models import Maintenances, Service
 from django.contrib.auth.models import User
+from django.urls import reverse_lazy
+from django.views import generic
+
 from vehicles.models import Vehicle
+
 from .forms import MaintenancesModelForm
+from .models import Maintenances, Service
 
 
 class MaintenanceListView(generic.ListView):

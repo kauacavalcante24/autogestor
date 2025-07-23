@@ -1,6 +1,7 @@
 import os
-from django.core.mail import send_mail
 from datetime import datetime
+
+from django.core.mail import send_mail
 
 
 def date_format():
