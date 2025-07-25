@@ -5,12 +5,31 @@
 {% endblock %}
 
 {% block content %}
-    {% for obj in vehicles %}
-        <p>{{ obj.brand }} {{ obj.model }}</p>
-        <p>{{ obj.plate }}</p>
-        <p>{{ obj.year }}</p>
-        <p>{{ obj.color }}</p>
-    {% empty %}
-        <p>Não há veículos cadastrados</p>
-    {% endfor %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+<div class="container">
+    <div class="text-center mb-4">
+        <h1>Veículos</h1>
+    </div>
+    <div class="row" style="justify-content: space-between">
+        {% for obj in vehicles %}
+            <div class="card" style="width: 25rem; margin-bottom: 10px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ obj.brand }} {{ obj.model }}</h5>
+                    <p class="mb-1"><strong>Placa:</strong> {{ obj.plate }}</p>
+                    <p class="mb-1"><strong>Ano:</strong> {{ obj.year }}</p>
+                    <p class="mb-0"><strong>Cor:</strong> {{ obj.color }}</p>
+                    <p class="mb-0"><strong>Proprietário:</strong><a href="{% url 'customer_detail' obj.owner.id %}" class="links"> {{ obj.owner }}</a></p>
+                    <a href="#" class="btn-warning-custom mt-2">Editar</a>
+                    <a href="#" class="btn-danger-custom mt-2">Deletar</a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="mt-4 text-start">Não há veículos cadastrados</p>
+        {% endfor %}
+    </div>
+    <div class="d-grid gap-2 col-6 mx-auto mt-4" style="width: 20rem;">
+        <a href="{% url 'inicial' %}" class="btn-dark-custom">Voltar</a>
+    </div>
+</div>
 {% endblock %}

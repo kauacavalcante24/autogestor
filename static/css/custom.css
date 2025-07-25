@@ -97,3 +97,13 @@
 .btn-warning-custom:hover {
     background-color: #765a04;
 }
+
+.links {
+    text-decoration: none;
+    color: red;
+    font-weight: bold;
+}
+
+.links:hover {
+    color: rgb(160, 0, 0);
+}

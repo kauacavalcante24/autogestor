@@ -14,7 +14,7 @@
         <div class="mb-3">
             <div class="d-flex" style="justify-content: space-between;" >
                 <p><strong>Data de Entrada:</strong> {{ object.entry_date|date:"d/m/y \à\s\ H:i" }}</p>
-                <p><strong>Proprietário:</strong> <a href="{% url 'customer_detail' object.vehicle.owner.id %}" style="text-decoration: none;">{{ object.vehicle.owner }}</a></p>
+                <p><strong>Proprietário:</strong> <a href="{% url 'customer_detail' object.vehicle.owner.id %}" class="links">{{ object.vehicle.owner }}</a></p>
             </div>
             <div class="d-flex" style="justify-content: space-between;" >
                 {% if object.status == 'in_progress' %}
