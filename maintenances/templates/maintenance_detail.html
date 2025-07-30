@@ -3,31 +3,57 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+<style>
+    #container {
+        width: 50vw;
+    }
+
+    #container-infos {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    @media(max-width: 750px) {
+        #container {
+            width: 95vw;
+        }
+
+        #container-infos {
+            display: grid;
+            justify-content: space-between;
+        }
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5" style="width: 50vw;">
+<div class="container mt-5" id="container">
     <div class="card shadow-sm p-4" style="border-radius: 12px;">
-        <h2 class="mb-3">{{ object.vehicle }}</h2>
+        <div class="text-center">
+            <h2 class="mb-3">{{ object.vehicle.brand }} {{ object.vehicle.model }}</h2>
+        </div>
         <hr>
-
         <div class="mb-3">
-            <div class="d-flex" style="justify-content: space-between;" >
-                <p><strong>Data de Entrada:</strong> {{ object.entry_date|date:"d/m/y \à\s\ H:i" }}</p>
-                <p><strong>Proprietário:</strong> <a href="{% url 'customer_detail' object.vehicle.owner.id %}" class="links">{{ object.vehicle.owner }}</a></p>
-            </div>
-            <div class="d-flex" style="justify-content: space-between;" >
-                {% if object.status == 'in_progress' %}
-                    <p><strong>Status:</strong><strong class="text-warning"> PENDENTE</strong></p>
-                {% elif object.status == 'completed' %}
-                    <p><strong>Status:</strong><strong class="text-success"> CONCLUÍDO</strong></p>
-                {% elif object.status == 'waiting' %}
-                    <p><strong>Status:</strong><strong class="text-primary"> AGUARDANDO APROVAÇÂO</strong></p>
-                {% endif %}
-                <p><strong>Cor: </strong>{{ object.vehicle.color }}</p>
+            <div id="container-infos">
+                <ul class="list-unstyled">
+                    <li><strong>Proprietário:</strong> <a href="{% url 'customer_detail' object.vehicle.owner.id %}" class="links">{{ object.vehicle.owner }}</a></li>
+                    <li><strong>Placa:</strong> {{ object.vehicle.plate }}</li>
+                    <li><strong>Data de Entrada:</strong> {{ object.entry_date|date:"d/m/y \à\s\ H:i" }}</li>
+                </ul>
+                <ul class="list-unstyled">
+                    {% if object.status == 'in_progress' %}
+                        <li><strong>Status:</strong><strong class="text-warning"> PENDENTE</strong></li>
+                    {% elif object.status == 'completed' %}
+                        <li><strong>Status:</strong><strong class="text-success"> CONCLUÍDO</strong></li>
+                    {% elif object.status == 'waiting' %}
+                        <li><strong>Status:</strong><strong class="text-primary"> AGUARDANDO APROVAÇÂO</strong></li>
+                    {% endif %}
+                    <li><strong>Cor: </strong>{{ object.vehicle.color }}</li>
+                    <li><strong>Valor Total:</strong> {{ object.total_value }}</li>
+                </ul>
             </div>
             <p><strong>Descrição:</strong> {{ object.description|default:"Não informado" }}</p>
-            <p><strong>Valor Total:</strong> {{ object.total_value }}</p>
             <hr>
             <h4>Serviços</h4>
             {% if services %}
